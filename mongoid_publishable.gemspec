@@ -1,16 +1,16 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "mongoid_publishable/version"
+require "mongoid/publishable/version"
 
 Gem::Specification.new do |s|
   s.name        = "mongoid_publishable"
-  s.version     = MongoidPublishable::VERSION
+  s.version     = Mongoid::Publishable::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Nicholas Bruning"]
   s.email       = ["nicholas@bruning.com.au"]
-  s.homepage    = ""
-  s.summary     = %q{A simple gem to make your models publishable.}
-  s.description = %q{This gem adds some fields, scopes and methods to simplify and declutter your publishable models.}
+  s.homepage    = "http://"
+  s.summary     = %q{Add publishable behaviours to mongoid models.}
+  s.description = %q{This gem adds some fields, scopes and methods to simplify and declutter your models that need to be drafted and published.}
 
   s.rubyforge_project = "mongoid_publishable"
 

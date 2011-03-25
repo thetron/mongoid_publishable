@@ -1,3 +1,1 @@
-module Mongoid
-  autoload :Publishable, 'mongoid/publishable'
-end
+require File.join(File.dirname(__FILE__), 'mongoid/publishable')
