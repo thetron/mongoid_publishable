@@ -32,13 +32,17 @@ other mongoid model extension:
 Your models will now have a `published_at` date as well as these
 instance methods (they should be self-explanatory):
 
+    is_scheduled?
     is_published?
     is_draft?
+    schedule!(date_time)
     publish!
     unpublish!
 
 Additionally, you get a couple of scopes to help find what you're
 looking for:
 
+    ModelName.scheduled # returns all scheduled models (published_at is
+in the future)
     ModelName.published # returns all published models
     ModelName.drafts # returns all unpublished models
