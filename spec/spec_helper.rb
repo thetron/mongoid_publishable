@@ -1,8 +1,12 @@
 $: << File.expand_path("../../lib", __FILE__)
 
 require 'database_cleaner'
+require 'mongoid'
+require 'mongoid-rspec'
+require 'mongoid_publishable'
 
 RSpec.configure do |config|
+  config.include Mongoid::Matchers
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
   end
@@ -11,9 +15,6 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 end
-
-require 'mongoid'
-require 'mongoid_publishable'
 
 Mongoid.configure do |config|
   config.master = Mongo::Connection.new.db("mongoid_publishable_test")

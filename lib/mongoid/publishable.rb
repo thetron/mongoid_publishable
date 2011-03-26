@@ -1,12 +1,16 @@
 module Mongoid
   module Publishable
     def self.included(base)
-      base.field :published_at, :type => DateTime
+      base.field :published_at, :type => DateTime, :default => nil
       base.extend ClassMethods
       base.send :include, InstanceMethods
     end
 
     module ClassMethods
+      def scheduled
+        where(:published_at => {'$gt' => Time.now}).asc(:published_at)
+      end
+
       def published
         where(:published_at => {'$lte' => Time.now}).desc(:published_at)
       end
@@ -17,22 +21,31 @@ module Mongoid
     end
 
     module InstanceMethods
+      def is_scheduled?
+        return true if self.published_at && self.published_at > Time.now
+        false
+      end
+
       def is_published?
-        !published_at.nil?
+        return true if self.published_at && self.published_at <= Time.now
+        false
       end
 
       def is_draft?
-        published_at.nil?
+        return true if self.published_at.nil?
+        false
+      end
+
+      def schedule!(time)
+        update_attributes(:published_at => time)
       end
 
       def publish!
-        self.published_at = Time.now
-        self.save!
+        update_attributes(:published_at => Time.now)
       end
 
       def unpublish!
-        self.published_at = nil
-        self.save!
+        update_attributes(:published_at => nil)
       end
     end
   end
