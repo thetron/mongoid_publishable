@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Nicholas Bruning"]
   s.email       = ["nicholas@bruning.com.au"]
-  s.homepage    = "http://"
+  s.homepage    = "http://github.com/thetron/mongoid_publishable"
   s.summary     = %q{Add publishable behaviours to mongoid models.}
   s.description = %q{This gem adds some fields, scopes and methods to simplify and declutter your models that need to be drafted and published.}
 
