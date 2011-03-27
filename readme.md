@@ -46,3 +46,9 @@ looking for:
 in the future)
     ModelName.published # returns all published models
     ModelName.drafts # returns all unpublished models
+
+'Scheduled' objects are those with `published_at` dates in the future, 'Published' objects are those with `published_at` dates in the past and 'Drafts' are those with no `published_at` date set at all.
+
+# What's next?
+
+I'm currently working on adding some routing helpers and built in controllers to manage the publishing and unpublishing of objects, so that all you need to do is add the links to a page.
