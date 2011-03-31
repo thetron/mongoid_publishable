@@ -13,7 +13,10 @@ class MongoidPublishable::PublishController < ApplicationController
 
   private
   def get_resource
-    key = params.keys.first
+    key = ""
+    params.keys.each do |k|
+      key = k if k.index("_id")
+    end
     id = params[key]
     name = key.split("_id").first
     klass = name.classify
