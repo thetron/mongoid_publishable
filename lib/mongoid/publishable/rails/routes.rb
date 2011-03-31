@@ -1,8 +1,8 @@
 module ActionDispatch::Routing
   class Mapper
     def publishable
-      self.match 'publish'    => 'mongoid_publishable/publish#create'
-      self.match 'unpublish'  => 'mongoid_publishable/unpublish#destroy'
+      self.get 'publish'    => 'mongoid_publishable/publish#create'
+      self.delete 'unpublish'  => 'mongoid_publishable/publish#destroy'
     end
   end
 end
