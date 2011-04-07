@@ -17,6 +17,7 @@ class MongoidPublishable::PublishController < ApplicationController
     params.keys.each do |k|
       key = k if k.index("_id")
     end
+    raise Mongoid::Publishable::NoIdSpecifed.new if key.nil? || key.blank?
     id = params[key]
     name = key.split("_id").first
     klass = name.classify
@@ -26,5 +27,6 @@ class MongoidPublishable::PublishController < ApplicationController
     else
       @resource = model.find(id)
     end
+    raise Mongoid::Publishable::ResourceNotFound.new(model, id) if @resource.nil?
   end
 end
