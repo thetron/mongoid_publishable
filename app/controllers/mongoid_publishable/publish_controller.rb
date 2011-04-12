@@ -17,6 +17,25 @@ class MongoidPublishable::PublishController < ApplicationController
     super
   end
 
+  def past_tense_action_name_for(action)
+    case action
+    when 'create'
+      'published'
+    when 'destroy'
+      'unpublished'
+    end
+  end
+
+  def resource_description
+    get_resouce
+    @resource.to_s
+  end
+
+  def resource_name
+    get_resource
+    @resource.class.to_s.humanize
+  end
+
   private
   def get_resource
     key = ""
