@@ -1,5 +1,6 @@
 class MongoidPublishable::PublishController < ApplicationController
   before_filter :get_resource, :only => [:create, :destroy]
+  after_filter :track_activity, :only => [:create, :destroy]
 
   def create
     @resource.publish!
@@ -9,6 +10,11 @@ class MongoidPublishable::PublishController < ApplicationController
   def destroy
     @resource.unpublish!
     redirect_to :back
+  end
+
+  protected
+  def track_activity
+    super
   end
 
   private
