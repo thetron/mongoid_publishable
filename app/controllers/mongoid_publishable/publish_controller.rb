@@ -27,7 +27,7 @@ class MongoidPublishable::PublishController < ApplicationController
   end
 
   def resource_description
-    get_resouce
+    get_resource
     @resource.to_s
   end
 
