@@ -2,8 +2,10 @@ module Mongoid
   module Publishable
     def self.included(base)
       base.field :published_at, :type => DateTime, :default => nil
+      base.field :permalink
       base.extend ClassMethods
       base.send :include, InstanceMethods
+      base.before_create :generate_permalink!
     end
 
     module ClassMethods
@@ -46,6 +48,14 @@ module Mongoid
 
       def unpublish!
         update_attributes(:published_at => nil)
+      end
+
+      protected
+      def generate_permalink!
+        self.permalink = ActiveSupport::SecureRandom.hex(4)
+        while self.class.first(:conditions => {:permalink => self.permalink}) do
+          self.permalink = ActiveSupport::SecureRandom.hex(4)
+        end
       end
     end
   end
