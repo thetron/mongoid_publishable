@@ -14,7 +14,7 @@ class MongoidPublishable::PublishController < ApplicationController
 
   protected
   def track_activity
-    super
+    super if defined?(MongoidActivityTracker)
   end
 
   def past_tense_action_name_for(action)

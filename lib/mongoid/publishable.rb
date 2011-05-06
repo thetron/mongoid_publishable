@@ -1,10 +1,10 @@
 module Mongoid
   module Publishable
-    def self.included(base)
-      base.field :published_at, :type => DateTime, :default => nil
-      base.field :permalink
-      base.extend ClassMethods
-      base.send :include, InstanceMethods
+    extend ActiveSupport::Concern
+
+    included do
+      field :published_at, :type => DateTime, :default => nil
+      field :permalink
     end
 
     module ClassMethods
@@ -22,6 +22,10 @@ module Mongoid
     end
 
     module InstanceMethods
+      def publish=(value)
+        self.published_at = Time.now
+      end
+
       def is_scheduled?
         return true if self.published_at && self.published_at > Time.now
         false
